@@ -2,8 +2,8 @@ import Control.Lens
 import Data.List.Split
 
 makeId :: Int -> Int
-makeId n = f n 1
-    where f n p = if p > n then n * p + n else f n (p * 10)
+makeId n = f 1
+    where f p = if p > n then n * p + n else f (p * 10)
 
 minInvalidHalf :: String -> Int
 minInvalidHalf s =
@@ -36,6 +36,5 @@ sumRange (a, b) = sum $ map makeId [a..b]
 main :: IO ()
 main = do
     contents <- getContents
-    {- print $ head $ splitOn "-" $ head . lines $ contents -}
     let ranges = splitOn "," $ head . lines $ contents
     print $ sum $ map (sumRange . invalidRange) ranges
