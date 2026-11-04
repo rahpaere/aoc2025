@@ -21,6 +21,7 @@ lexCeil (n:rest) = lexCeil' n rest
             | x < n' = n'
             | x > n' = n' + 1
             | otherwise = lexCeil' n' xs
+lexCeil _ = error "must have nonempty list"
 
 -- Greatest chunk that would make an invalid ID not greater than the input.
 lexFloor :: [Int] -> Int
@@ -31,6 +32,7 @@ lexFloor (n:rest) = lexFloor' n rest
             | x < n' = n' - 1
             | x > n' = n'
             | otherwise = lexFloor' n' xs
+lexFloor _ = error "must have nonempty list"
 
 chunkCeil :: String -> Int -> Int
 chunkCeil s reps = max actual wideEnough
@@ -57,7 +59,10 @@ chunkRange a b reps = map (makeId' reps) [start..stop]
 invalidRange :: String -> (String, String)
 invalidRange s =
     let bounds = splitOn "-" s
-    in (head bounds, last bounds)
+    in
+        case bounds of
+        [a, b] -> (a, b)
+        _ -> error "could not split on -"
 
 sumRange' :: (String, String) -> Int
 sumRange' (a, b) = sum $ nub $ concat $ map (chunkRange a b) [2..m]
@@ -66,5 +71,5 @@ sumRange' (a, b) = sum $ nub $ concat $ map (chunkRange a b) [2..m]
 main :: IO ()
 main = do
     contents <- getContents
-    let ranges = splitOn "," $ head . lines $ contents
+    let ranges = splitOn "," $ concat . lines $ contents
     print $ sum $ map (sumRange' . invalidRange) ranges

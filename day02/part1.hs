@@ -26,9 +26,10 @@ maxInvalidHalf s =
 invalidRange :: String -> (Int, Int)
 invalidRange s =
     let bounds = splitOn "-" s
-        a = minInvalidHalf $ head bounds
-        b = maxInvalidHalf $ last bounds
-    in (a, b)
+    in
+        case bounds of
+        [a, b] -> (minInvalidHalf a, maxInvalidHalf b)
+        _ -> error "could not split on -"
 
 sumRange :: (Int, Int) -> Int
 sumRange (a, b) = sum $ map makeId [a..b]
@@ -36,5 +37,5 @@ sumRange (a, b) = sum $ map makeId [a..b]
 main :: IO ()
 main = do
     contents <- getContents
-    let ranges = splitOn "," $ head . lines $ contents
-    print $ sum $ map (sumRange . invalidRange) ranges
+    let line = concat . lines $ contents
+    print $ sum $ map (sumRange . invalidRange) $ splitOn "," line
