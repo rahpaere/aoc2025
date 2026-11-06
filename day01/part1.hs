@@ -4,9 +4,9 @@ comboZeroes turns = length . filter (== 0) . map (`mod` 100) $ scanl (+) 50 turn
 parseTurn :: String -> Int
 parseTurn ('L':s) = -(read s)
 parseTurn ('R':s) = read s
+parseTurn _ = error "must turn L or R"
 
 main :: IO ()
 main = do
-    contents <- getContents
-    let turns = map parseTurn $ lines contents
-    print $ comboZeroes turns
+    zeroes <- comboZeroes . map parseTurn . lines <$> getContents
+    print zeroes
