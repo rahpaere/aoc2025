@@ -4,3 +4,4 @@ I didn't participate in this event synchronously, but I am going back to use it 
 
 1. [Secret Entrance](https://adventofcode.com/2025/day/1)
 1. [Gift Shop](https://adventofcode.com/2025/day/2)
+1. [Lobby](https://adventofcode.com/2025/day/3)

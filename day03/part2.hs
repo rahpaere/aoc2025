@@ -3,15 +3,9 @@ import Data.Char
 parseInput :: String -> [[Int]]
 parseInput s = map (map digitToInt) $ lines s
 
-dropMin :: [Int] -> [Int]
-dropMin [] = []
-dropMin xs = before ++ tail after
-    where
-        m = minimum xs
-        (before, after) = break (== m) xs
-
 incorporate :: Int -> [Int] -> [Int]
-incorporate b bs = if b >= (head bs) then b:(dropMin bs) else bs
+incorporate b [] = []
+incorporate b bs@(h:t) = if b >= h then b:(incorporate h t) else bs
 
 bestBatteries :: Int -> [Int] -> [Int]
 bestBatteries n bs@(b:t) = if length bs <= n then bs else incorporate b (bestBatteries n t)
