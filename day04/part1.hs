@@ -29,7 +29,7 @@ reachable :: Set (Int, Int) -> (Int, Int) -> Bool
 reachable locs loc = countNeighbors locs loc < 4
 
 countReachable :: Set (Int, Int) -> Int
-countReachable locs = length . filter (reachable locs) $ Set.toList locs
+countReachable locs = length . Set.filter (reachable locs) $ locs
 
 main :: IO ()
 main = do
