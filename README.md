@@ -7,3 +7,5 @@ I didn't participate in this event synchronously, but I am going back to use it 
 1. [Lobby](https://adventofcode.com/2025/day/3)
 1. [Printing Department](https://adventofcode.com/2025/day/4)
 1. [Cafeteria](https://adventofcode.com/2025/day/5)
+1. [Trash Compactor](https://adventofcode.com/2025/day/6)
+1. [Laboratories](https://adventofcode.com/2025/day/7)
